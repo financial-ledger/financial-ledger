@@ -220,9 +220,11 @@ interface ErrorLabelProps extends HTMLAttributes<HTMLLabelElement> {
 }
 
 function ErrorLabel(props: ErrorLabelProps) {
+  const { inputId } = useInputContext('ErrorLabel');
   return (
     <Primitive.label
       {...props}
+      htmlFor={inputId}
       className={cx(
         css({
           textStyle: 'Caption_12_M',
