@@ -8,6 +8,7 @@ export default defineConfig({
   preflight: true,
   include: ["./src/**/*.{js,jsx,ts,tsx}"],
   exclude: [],
+  presets: [],
   theme: {
     keyframes,
     tokens,

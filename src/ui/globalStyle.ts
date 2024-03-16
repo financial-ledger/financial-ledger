@@ -2,7 +2,6 @@ import { defineGlobalStyles } from "@pandacss/dev";
 
 export const globalStyle = defineGlobalStyles({
   html: {
-    fontSize: "62.5%",
     minHeight: "100vh",
     "@supports (-webkit-touch-callout: none)": {
       minHeight: "-webkit-fill-available",
