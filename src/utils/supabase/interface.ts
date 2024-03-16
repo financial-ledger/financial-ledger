@@ -9,7 +9,175 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never;
+      category: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+        };
+        Relationships: [];
+      };
+      expenditure: {
+        Row: {
+          amount: number;
+          category_id: number;
+          created_at: string;
+          date: string;
+          id: number;
+          note: string | null;
+          user_id: string;
+        };
+        Insert: {
+          amount: number;
+          category_id: number;
+          created_at?: string;
+          date: string;
+          id?: number;
+          note?: string | null;
+          user_id: string;
+        };
+        Update: {
+          amount?: number;
+          category_id?: number;
+          created_at?: string;
+          date?: string;
+          id?: number;
+          note?: string | null;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'public_expenditure_category_id_fkey';
+            columns: ['category_id'];
+            isOneToOne: false;
+            referencedRelation: 'category';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'public_expenditure_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      goal: {
+        Row: {
+          amount: number;
+          created_at: string;
+          id: number;
+          user_id: string;
+        };
+        Insert: {
+          amount?: number;
+          created_at?: string;
+          id?: number;
+          user_id: string;
+        };
+        Update: {
+          amount?: number;
+          created_at?: string;
+          id?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'public_goal_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      income: {
+        Row: {
+          amount: number;
+          created_at: string;
+          date: string | null;
+          id: number;
+          regular: boolean;
+          user_id: string;
+        };
+        Insert: {
+          amount: number;
+          created_at?: string;
+          date?: string | null;
+          id?: number;
+          regular: boolean;
+          user_id: string;
+        };
+        Update: {
+          amount?: number;
+          created_at?: string;
+          date?: string | null;
+          id?: number;
+          regular?: boolean;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'public_income_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      regular_expenditure: {
+        Row: {
+          amount: number;
+          category_id: number;
+          created_at: string;
+          id: number;
+          note: string | null;
+          user_id: string;
+        };
+        Insert: {
+          amount: number;
+          category_id: number;
+          created_at?: string;
+          id?: number;
+          note?: string | null;
+          user_id: string;
+        };
+        Update: {
+          amount?: number;
+          category_id?: number;
+          created_at?: string;
+          id?: number;
+          note?: string | null;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'public_regular_expenditure_category_id_fkey';
+            columns: ['category_id'];
+            isOneToOne: false;
+            referencedRelation: 'category';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'public_regular_expenditure_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
