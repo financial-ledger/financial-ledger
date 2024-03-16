@@ -34,6 +34,9 @@ export const globalStyle = defineGlobalStyles({
     listStyle: 'none',
   },
   input: {
+    '&:focus': {
+      outline: 'none',
+    },
     '&::-webkit-search-decoration, &::-webkit-search-cancel-button, &::-webkit-search-results-button, &::-webkit-search-results-decoration':
       {
         display: 'none',
