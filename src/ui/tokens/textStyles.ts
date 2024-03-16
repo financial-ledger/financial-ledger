@@ -209,8 +209,122 @@ export const textStyles = defineTextStyles({
       letterSpacing: '-0.013rem',
     },
   },
+  Number_36_B: {
+    value: {
+      fontWeight: 800,
+      fontSize: '2.25rem',
+      lineHeight: '2.75rem',
+      letterSpacing: '-0.05rem',
+    },
+  },
+  Number_36_M: {
+    value: {
+      fontWeight: 600,
+      fontSize: '2.25rem',
+      lineHeight: '2.75rem',
+      letterSpacing: '-0.05rem',
+    },
+  },
+  Number_24_B: {
+    value: {
+      fontWeight: 800,
+      fontSize: '1.5rem',
+      lineHeight: '2rem',
+      letterSpacing: '-0.05rem',
+    },
+  },
+  Number_24_R: {
+    value: {
+      fontWeight: 500,
+      fontSize: '1.5rem',
+      lineHeight: '2rem',
+      letterSpacing: '-0.05rem',
+    },
+  },
+  Number_18_B: {
+    value: {
+      fontSize: '1.125rem',
+      fontWeight: 800,
+      lineHeight: '1.625rem',
+      letterSpacing: '-0.05rem',
+    },
+  },
+  Number_18_M: {
+    value: {
+      fontWeight: 600,
+      fontSize: '1.125rem',
+      lineHeight: '1.625rem',
+      letterSpacing: '-0.05rem',
+    },
+  },
+  Number_16_B: {
+    value: {
+      fontWeight: 800,
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+      letterSpacing: '-0.05rem',
+    },
+  },
+  Number_16_M: {
+    value: {
+      fontWeight: 600,
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+      letterSpacing: '-0.05rem',
+    },
+  },
+  Number_14_B: {
+    value: {
+      fontWeight: 700,
+      fontSize: '0.875rem',
+      lineHeight: '1.25rem',
+      letterSpacing: '-0.038rem',
+    },
+  },
+  Number_12_B: {
+    value: {
+      fontWeight: 700,
+      fontSize: '0.75rem',
+      lineHeight: '1rem',
+      letterSpacing: '-0.038rem',
+    },
+  },
+  Number_12_M: {
+    value: {
+      fontWeight: 600,
+      fontSize: '0.75rem',
+      lineHeight: '1rem',
+      letterSpacing: '-0.038rem',
+    },
+  },
+  Number_9_B: {
+    value: {
+      fontWeight: 800,
+      fontSize: '0.563rem',
+      lineHeight: '0.875rem',
+      letterSpacing: '-0.038rem',
+    },
+  },
+  Number_9_R: {
+    value: {
+      fontSize: '0.5rem',
+      fontWeight: 600,
+      lineHeight: '0.875rem',
+      letterSpacing: '-0.038rem',
+    },
+  },
+  Number_9_M: {
+    value: {
+      fontSize: '0.5rem',
+      fontWeight: 500,
+      lineHeight: '0.875rem',
+      letterSpacing: '-0.038rem',
+    },
+  },
 });
 
+// px to rem
+// 44 => 2.75
 // 36 => 2.25
 // 34 => 2.125
 // 32 => 2
@@ -227,5 +341,8 @@ export const textStyles = defineTextStyles({
 // 12 => 0.75
 // 10 => 0.625
 // 9 => 0.563
+// 8 => 0.5
 // -0.2 => -0.013
 // -0.4 => -0.025
+// -0.6 => -0.038
+// -0.8 => -0.05
