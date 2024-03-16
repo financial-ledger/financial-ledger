@@ -1,18 +1,16 @@
-"use client";
+'use client';
 
-import { SignInWithOAuthCredentials } from "@supabase/supabase-js";
-import { ReactNode } from "react";
-import { createSupabaseBrowserClient } from "src/utils/supabase/browser";
-import { cx } from "styled-system/css";
-import { hstack } from "styled-system/patterns";
-import { ColorToken } from "styled-system/tokens";
-import { PropOrCondition } from "styled-system/types/prop-type";
+import { SignInWithOAuthCredentials } from '@supabase/supabase-js';
+import { ReactNode } from 'react';
+import { createSupabaseBrowserClient } from 'src/utils/supabase/browser';
+import { cx } from 'styled-system/css';
+import { hstack } from 'styled-system/patterns';
 
 interface OAuthButtonProps {
-  type: "kakao";
+  type: 'kakao';
   icon?: ReactNode;
   children: ReactNode;
-  options?: SignInWithOAuthCredentials["options"];
+  options?: SignInWithOAuthCredentials['options'];
   className?: string;
 }
 
@@ -28,7 +26,7 @@ export function OAuthButton({
       provider: type,
       options: {
         ...options,
-        redirectTo: window.location.origin + "/auth/callback",
+        redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
   return (
@@ -37,12 +35,12 @@ export function OAuthButton({
       className={cx(
         hstack({
           height: 52,
-          width: "100%",
-          justify: "center",
+          width: '100%',
+          justify: 'center',
           gap: 8,
           borderRadius: 2,
         }),
-        className
+        className,
       )}
       onClick={signInWithOAuth}
     >

@@ -1,7 +1,7 @@
 import {
   createContext as createReactContext,
   useContext as useReactContext,
-} from "react";
+} from 'react';
 
 class ContextError extends Error {
   constructor(contextName: string, consumerName: string) {

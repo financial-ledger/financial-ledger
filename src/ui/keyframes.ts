@@ -1,4 +1,4 @@
-import { defineKeyframes } from "@pandacss/dev";
+import { defineKeyframes } from '@pandacss/dev';
 
 export const keyframes = defineKeyframes({
   fadeIn: {
@@ -14,11 +14,11 @@ export const keyframes = defineKeyframes({
     to: { opacity: 0 },
   },
   slideIn: {
-    "0%": { opacity: "0", transform: "translateY(100%)" },
-    "100%": { opacity: "1", transform: "translateY(0)" },
+    '0%': { opacity: '0', transform: 'translateY(100%)' },
+    '100%': { opacity: '1', transform: 'translateY(0)' },
   },
   slideOut: {
-    "0%": { opacity: "1", transform: "translateY(0)" },
-    "100%": { opacity: "0", transform: "translateY(100%)" },
+    '0%': { opacity: '1', transform: 'translateY(0)' },
+    '100%': { opacity: '0', transform: 'translateY(100%)' },
   },
 });

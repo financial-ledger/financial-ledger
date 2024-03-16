@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 import {
   Carousel as ArkCarousel,
   type CarouselRootProps,
-} from "@ark-ui/react/carousel";
-import { useEffect, useState } from "react";
+} from '@ark-ui/react/carousel';
+import { useEffect, useState } from 'react';
 
 export function CarouselRoot({
   itemLength,
