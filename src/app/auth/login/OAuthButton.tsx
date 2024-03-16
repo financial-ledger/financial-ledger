@@ -3,27 +3,25 @@
 import { SignInWithOAuthCredentials } from "@supabase/supabase-js";
 import { ReactNode } from "react";
 import { createSupabaseBrowserClient } from "src/utils/supabase/browser";
+import { cx } from "styled-system/css";
 import { hstack } from "styled-system/patterns";
 import { ColorToken } from "styled-system/tokens";
 import { PropOrCondition } from "styled-system/types/prop-type";
 
 interface OAuthButtonProps {
   type: "kakao";
-  backgroundColor: PropOrCondition<
-    "backgroundColor",
-    readonly string[] | ColorToken
-  >;
   icon?: ReactNode;
   children: ReactNode;
   options?: SignInWithOAuthCredentials["options"];
+  className?: string;
 }
 
 export function OAuthButton({
   type,
-  backgroundColor,
   icon,
   children,
   options,
+  className,
 }: OAuthButtonProps) {
   const signInWithOAuth = async () =>
     createSupabaseBrowserClient().auth.signInWithOAuth({
@@ -36,14 +34,16 @@ export function OAuthButton({
   return (
     <button
       type="button"
-      className={hstack({
-        py: "1.2rem",
-        width: "100%",
-        justify: "center",
-        gap: 8,
-        backgroundColor,
-        borderRadius: "3rem",
-      })}
+      className={cx(
+        hstack({
+          height: 52,
+          width: "100%",
+          justify: "center",
+          gap: 8,
+          borderRadius: 2,
+        }),
+        className
+      )}
       onClick={signInWithOAuth}
     >
       {icon}
