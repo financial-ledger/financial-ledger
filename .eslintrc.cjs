@@ -12,6 +12,7 @@ module.exports = {
     'postcss.config.cjs',
     'scripts',
     'src/common/icons/lib',
+    '*.gen.ts',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

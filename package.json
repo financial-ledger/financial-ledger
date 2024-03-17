@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "gen-type": "node ./scripts/generate-type.cjs",
+    "gen-path": "node ./scripts/gen-path.js",
     "svgr": "npx @svgr/cli --typescript --no-index --jsx-runtime automatic --out-dir ./src/ui/Icon -- ./src/ui/Icon/svgs"
   },
   "dependencies": {
