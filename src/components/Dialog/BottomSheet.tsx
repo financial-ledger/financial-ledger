@@ -3,6 +3,8 @@ import {
   Dialog,
   DialogClose,
   DialogProps,
+  DialogTitle,
+  DialogTitleProps,
   DialogTrigger,
   Overlay,
   Portal,
@@ -51,6 +53,7 @@ export function BottomSheet({
 BottomSheet.Content = BottomSheetContent;
 BottomSheet.Trigger = DialogTrigger;
 BottomSheet.Header = BottomSheetHeader;
+BottomSheet.Title = BottomSheetTitle;
 
 function BottomSheetContent({
   children,
@@ -87,7 +90,7 @@ function BottomSheetHeader({
       className={cx(styles.header, className)}
       {...props}
     >
-      {children}
+      <DialogTitle>{children}</DialogTitle>
       <DialogClose>
         <SvgClose />
       </DialogClose>
@@ -95,12 +98,27 @@ function BottomSheetHeader({
   );
 }
 
+function BottomSheetTitle({
+  className,
+  children,
+  ...props
+}: DialogTitleProps) {
+  const { styles } = useBottomSheet('BottomSheetTitle');
+  return (
+    <DialogTitle className={cx(styles.title, className)} {...props}>
+      {children}
+    </DialogTitle>
+  );
+}
+
 const dialogStyles = sva({
-  slots: ['overlay', 'content', 'body', 'header'],
+  slots: ['overlay', 'content', 'body', 'header', 'title'],
   base: {
-    header: {
+    title: {
       color: 'gray10',
       textStyle: 'Body_18_B',
+    },
+    header: {
       height: 52,
       px: 20,
       width: '100%',
