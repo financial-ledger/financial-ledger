@@ -87,7 +87,7 @@ export function NumericInput({
     }
     setHasError(false);
 
-    if (!value) {
+    if (!newValue) {
       setValue(0);
     } else {
       setValue(numValue);
@@ -146,6 +146,7 @@ export function NumericInput({
 const hiddenElementStyle = css({
   visibility: 'hidden',
   position: 'absolute',
+  whiteSpace: 'pre',
 });
 
 const placeholderStyle = css({
