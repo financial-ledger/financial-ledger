@@ -25,14 +25,16 @@ const NODES = [
 // https://github.com/DefinitelyTyped/DefinitelyTyped/pull/55396
 // prettier-ignore
 type PropsWithoutRef<P> = P extends any ? ('ref' extends keyof P ? Pick<P, Exclude<keyof P, 'ref'>> : P) : P;
-type ComponentPropsWithoutRef<T extends React.ElementType> = PropsWithoutRef<
-  React.ComponentProps<T>
->;
+type ComponentPropsWithoutRef<T extends React.ElementType> =
+  PropsWithoutRef<React.ComponentProps<T>>;
 
-type Primitives = { [E in typeof NODES[number]]: PrimitiveForwardRefComponent<E> };
-type PrimitivePropsWithRef<E extends React.ElementType> = React.ComponentPropsWithRef<E> & {
-  asChild?: boolean;
+type Primitives = {
+  [E in (typeof NODES)[number]]: PrimitiveForwardRefComponent<E>;
 };
+type PrimitivePropsWithRef<E extends React.ElementType> =
+  React.ComponentPropsWithRef<E> & {
+    asChild?: boolean;
+  };
 
 interface PrimitiveForwardRefComponent<E extends React.ElementType>
   extends React.ForwardRefExoticComponent<PrimitivePropsWithRef<E>> {}
@@ -42,16 +44,21 @@ interface PrimitiveForwardRefComponent<E extends React.ElementType>
  * -----------------------------------------------------------------------------------------------*/
 
 const Primitive = NODES.reduce((primitive, node) => {
-  const Node = React.forwardRef((props: PrimitivePropsWithRef<typeof node>, forwardedRef: any) => {
-    const { asChild, ...primitiveProps } = props;
-    const Comp: any = asChild ? Slot : node;
+  const Node = React.forwardRef(
+    (
+      props: PrimitivePropsWithRef<typeof node>,
+      forwardedRef: any,
+    ) => {
+      const { asChild, ...primitiveProps } = props;
+      const Comp: any = asChild ? Slot : node;
 
-    React.useEffect(() => {
-      (window as any)[Symbol.for('radix-ui')] = true;
-    }, []);
+      React.useEffect(() => {
+        (window as any)[Symbol.for('radix-ui')] = true;
+      }, []);
 
-    return <Comp {...primitiveProps} ref={forwardedRef} />;
-  });
+      return <Comp {...primitiveProps} ref={forwardedRef} />;
+    },
+  );
 
   Node.displayName = `Primitive.${node}`;
 
@@ -99,7 +106,10 @@ const Primitive = NODES.reduce((primitive, node) => {
  * e.g. when focus is within a component as it is unmounted, or when managing focus on mount.
  */
 
-function dispatchDiscreteCustomEvent<E extends CustomEvent>(target: E['target'], event: E) {
+function dispatchDiscreteCustomEvent<E extends CustomEvent>(
+  target: E['target'],
+  event: E,
+) {
   if (target) ReactDOM.flushSync(() => target.dispatchEvent(event));
 }
 

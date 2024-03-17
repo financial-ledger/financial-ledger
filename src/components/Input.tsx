@@ -62,10 +62,7 @@ export function Input({
   const [isFocused, setIsFocused] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = e;
-    setValue(value);
+    setValue(e.target.value);
     onChange?.(e);
   };
 
@@ -135,14 +132,14 @@ interface ClearButtonProps extends HTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
 }
 
-function ClearButton(props: ClearButtonProps) {
+function ClearButton({ className, ...props }: ClearButtonProps) {
   const { onValueChange, isFocused, inputNode } =
     useInputContext('ClearButton');
 
   return (
     <Primitive.button
       {...props}
-      className={cx(clearButtonStyle({ isFocused }), props.className)}
+      className={cx(clearButtonStyle({ isFocused }), className)}
       onClick={(e) => {
         e.preventDefault();
         onValueChange('');
@@ -170,7 +167,10 @@ interface MaxLengthIndicatorProps
   asChild?: boolean;
 }
 
-function MaxLengthIndicator(props: MaxLengthIndicatorProps) {
+function MaxLengthIndicator({
+  className,
+  ...props
+}: MaxLengthIndicatorProps) {
   const { maxLength, value, isFocused } = useInputContext(
     'MaxLengthIndicator',
   );
@@ -186,7 +186,7 @@ function MaxLengthIndicator(props: MaxLengthIndicatorProps) {
           isFocused,
           error: currentLength > maxLength,
         }),
-        props.className,
+        className,
       )}
     >
       {currentLength}/{maxLength}
@@ -219,7 +219,7 @@ interface ErrorLabelProps extends HTMLAttributes<HTMLLabelElement> {
   asChild?: boolean;
 }
 
-function ErrorLabel(props: ErrorLabelProps) {
+function ErrorLabel({ className, ...props }: ErrorLabelProps) {
   const { inputId } = useInputContext('ErrorLabel');
   return (
     <Primitive.label
@@ -230,7 +230,7 @@ function ErrorLabel(props: ErrorLabelProps) {
           textStyle: 'Caption_12_M',
           color: 'point01',
         }),
-        props.className,
+        className,
       )}
     />
   );

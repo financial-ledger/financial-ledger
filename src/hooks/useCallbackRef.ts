@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from 'react';
 
 /**
  * A custom hook that converts a callback to a ref to avoid triggering re-renders when passed as a
  * prop or avoid re-executing effects when passed as a dependency
  */
 function useCallbackRef<T extends (...args: any[]) => any>(
-  callback: T | undefined
+  callback: T | undefined,
 ): T {
   const callbackRef = useRef(callback);
 
@@ -14,7 +14,10 @@ function useCallbackRef<T extends (...args: any[]) => any>(
   });
 
   // https://github.com/facebook/react/issues/19240
-  return useMemo(() => ((...args) => callbackRef.current?.(...args)) as T, []);
+  return useMemo(
+    () => ((...args) => callbackRef.current?.(...args)) as T,
+    [],
+  );
 }
 
 export { useCallbackRef };
