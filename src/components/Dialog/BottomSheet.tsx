@@ -6,11 +6,10 @@ import {
   Overlay,
   Portal,
 } from '@radix-ui/react-dialog';
-import { ReactNode } from 'react';
 import { useControllableState } from 'src/hooks/useControllableState';
 import { createContext } from 'src/utils/createContext';
-import { sva } from 'styled-system/css';
-import { PullToClose } from '../PullToClose';
+import { cx, sva } from 'styled-system/css';
+import { PullToClose, PullToCloseProps } from '../PullToClose';
 
 export interface BottomSheetProps extends DialogProps {}
 
@@ -44,7 +43,11 @@ export function BottomSheet({
 BottomSheet.Content = BottomSheetContent;
 BottomSheet.Trigger = DialogTrigger;
 
-function BottomSheetContent({ children }: { children: ReactNode }) {
+function BottomSheetContent({
+  children,
+  className,
+  ...rest
+}: Omit<PullToCloseProps, 'onClose'>) {
   const dialogStyle = dialogStyles();
   const { onOpenChange } = useBottomSheet('BottomSheetContent');
   return (
@@ -53,7 +56,8 @@ function BottomSheetContent({ children }: { children: ReactNode }) {
       <Content className={dialogStyle.content}>
         <PullToClose
           onClose={() => onOpenChange(false)}
-          className={dialogStyle.body}
+          className={cx(dialogStyle.body, className)}
+          {...rest}
         >
           {children}
         </PullToClose>

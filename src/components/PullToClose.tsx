@@ -1,11 +1,11 @@
-import { ReactNode, useRef, useState } from 'react';
+import { ComponentProps, ReactNode, useRef, useState } from 'react';
 
 import { m, PanInfo } from 'framer-motion';
 import { LazyDomMaxMotion } from 'src/ui/framer/LazyDomMaxMotion';
 
-interface PullToCloseProps {
+export interface PullToCloseProps
+  extends ComponentProps<typeof m.div> {
   children: ReactNode;
-  className?: string;
   onClose: VoidFunction;
   threshold?: number;
 }
@@ -20,6 +20,7 @@ export function PullToClose({
   className,
   children,
   threshold = THRESHOLD,
+  ...restProps
 }: PullToCloseProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [snapToOrigin, setSnapToOrigin] = useState(false);
@@ -51,6 +52,7 @@ export function PullToClose({
   return (
     <LazyDomMaxMotion>
       <m.div
+        {...restProps}
         animate={{ y: '0%' }}
         className={className}
         drag="y"
