@@ -1,3 +1,4 @@
+import { useAnimate } from 'framer-motion';
 import {
   ChangeEvent,
   InputHTMLAttributes,
@@ -7,7 +8,11 @@ import {
   useState,
 } from 'react';
 import { useControllableState } from 'src/hooks/useControllableState';
-import { css, cva, cx, sva } from 'styled-system/css';
+import { css, cx, sva } from 'styled-system/css';
+
+const SHAKE_ANIMATION = Array.from({ length: 3 }).flatMap(() => [
+  -5, 0, 5, 0,
+]);
 
 interface NumericInputProps
   extends Omit<
@@ -28,7 +33,7 @@ const formatter = {
   },
   unFormat: (value: string) => {
     const numericValue = value.replace(/[^0-9]/g, '');
-    return parseInt(numericValue);
+    return parseInt(numericValue, 10);
   },
 };
 
@@ -56,18 +61,28 @@ export function NumericInput({
     error: hasError,
   });
 
+  const [scope, animate] = useAnimate();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
-      target: { value },
+      target: { value: newValue },
     } = e;
-    const numValue = Number(formatter.unFormat(value));
-    if (value !== '' && isNaN(numValue)) {
+    const numValue = Number(formatter.unFormat(newValue));
+    if (newValue !== '' && Number.isNaN(numValue)) {
       return;
     }
 
     if (numValue >= 일조) {
       setHasError(true);
-      // TODO: shake animation
+
+      animate(
+        scope.current,
+        {
+          x: SHAKE_ANIMATION,
+        },
+        { duration: 0.3 },
+      );
+
       return;
     }
     setHasError(false);
@@ -102,7 +117,7 @@ export function NumericInput({
   }, [value]);
 
   return (
-    <div className={cx(inputStyle.root, className)}>
+    <div ref={scope} className={cx(inputStyle.root, className)}>
       <input
         {...rest}
         id={inputId}
@@ -117,6 +132,7 @@ export function NumericInput({
         )}
       />
       <label
+        htmlFor={inputId}
         className={value ? inputStyle.input : placeholderStyle}
         ref={labelRef}
       >
