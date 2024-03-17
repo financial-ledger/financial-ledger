@@ -1,21 +1,26 @@
 import {
   Content,
   Dialog,
+  DialogClose,
   DialogProps,
   DialogTrigger,
   Overlay,
   Portal,
 } from '@radix-ui/react-dialog';
+import { HTMLAttributes } from 'react';
 import { useControllableState } from 'src/hooks/useControllableState';
+import SvgClose from 'src/ui/Icon/Close';
 import { createContext } from 'src/utils/createContext';
 import { cx, sva } from 'styled-system/css';
 import { PullToClose, PullToCloseProps } from '../PullToClose';
+import { Primitive } from '../primitives';
 
 export interface BottomSheetProps extends DialogProps {}
 
 const [BottomSheetProvider, useBottomSheet] = createContext<{
   open?: boolean;
   onOpenChange: (value: boolean) => void;
+  styles: ReturnType<typeof dialogStyles>;
 }>('BottomSheet');
 
 export function BottomSheet({
@@ -25,6 +30,7 @@ export function BottomSheet({
   children,
   ...props
 }: BottomSheetProps) {
+  const dialogStyle = dialogStyles();
   const [open, setOpen] = useControllableState({
     prop: openProp,
     defaultProp: defaultOpen,
@@ -32,7 +38,9 @@ export function BottomSheet({
   });
 
   return (
-    <BottomSheetProvider value={{ open, onOpenChange: setOpen }}>
+    <BottomSheetProvider
+      value={{ open, onOpenChange: setOpen, styles: dialogStyle }}
+    >
       <Dialog {...props} open={open} onOpenChange={setOpen}>
         {children}
       </Dialog>
@@ -42,21 +50,23 @@ export function BottomSheet({
 
 BottomSheet.Content = BottomSheetContent;
 BottomSheet.Trigger = DialogTrigger;
+BottomSheet.Header = BottomSheetHeader;
 
 function BottomSheetContent({
   children,
   className,
   ...rest
 }: Omit<PullToCloseProps, 'onClose'>) {
-  const dialogStyle = dialogStyles();
-  const { onOpenChange } = useBottomSheet('BottomSheetContent');
+  const { onOpenChange, styles } = useBottomSheet(
+    'BottomSheetContent',
+  );
   return (
     <Portal>
-      <Overlay className={dialogStyle.overlay} />
-      <Content className={dialogStyle.content}>
+      <Overlay className={styles.overlay} />
+      <Content className={styles.content}>
         <PullToClose
           onClose={() => onOpenChange(false)}
-          className={cx(dialogStyle.body, className)}
+          className={cx(styles.body, className)}
           {...rest}
         >
           {children}
@@ -66,9 +76,38 @@ function BottomSheetContent({
   );
 }
 
+function BottomSheetHeader({
+  className,
+  children,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
+  const { styles } = useBottomSheet('BottomSheetHeader');
+  return (
+    <Primitive.div
+      className={cx(styles.header, className)}
+      {...props}
+    >
+      {children}
+      <DialogClose>
+        <SvgClose />
+      </DialogClose>
+    </Primitive.div>
+  );
+}
+
 const dialogStyles = sva({
-  slots: ['overlay', 'content', 'body'],
+  slots: ['overlay', 'content', 'body', 'header'],
   base: {
+    header: {
+      color: 'gray10',
+      textStyle: 'Body_18_B',
+      height: 52,
+      px: 20,
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
     overlay: {
       position: 'fixed',
       inset: 0,
@@ -82,13 +121,12 @@ const dialogStyles = sva({
       zIndex: 1,
     },
     body: {
-      maxHeight: 'calc(100vh - 4rem)',
+      pt: 8,
+      maxHeight: 'calc(100vh - 8rem)',
       top: '50%',
       transform: 'translate(-50%, -50%)',
       bg: 'white',
       borderTopRadius: 8,
-      display: 'flex',
-      flexDirection: 'column',
       gap: 24,
       overflow: 'hidden',
       position: 'relative',
