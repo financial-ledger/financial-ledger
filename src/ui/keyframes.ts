@@ -13,11 +13,11 @@ export const keyframes = defineKeyframes({
     from: { opacity: 1 },
     to: { opacity: 0 },
   },
-  slideIn: {
+  slideUp: {
     '0%': { opacity: '0', transform: 'translateY(100%)' },
     '100%': { opacity: '1', transform: 'translateY(0)' },
   },
-  slideOut: {
+  slideDown: {
     '0%': { opacity: '1', transform: 'translateY(0)' },
     '100%': { opacity: '0', transform: 'translateY(100%)' },
   },
